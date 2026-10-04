@@ -257,7 +257,7 @@ def main(hydra_cfg):
             task_names = benchmark.get_task_names()
             skill_learning_cfg = cfg.lifelong.lotus
             skill_exp_name = skill_learning_cfg.exp_name
-            exp_dir = f"/public/home/group_luoping/leiyuheng/dataset/datasets/lotus/{skill_exp_name}/skill_data"
+            exp_dir = f"path_to_dataset/lotus/{skill_exp_name}/skill_data" # TODO: replace path_to_dataset
             data_file_name_list = []
             subtasks_file_name_list = []
             used_data_file_name_list_skill = task_names #[]
@@ -267,8 +267,8 @@ def main(hydra_cfg):
                 if os.path.isdir(dataset_category_path) and dataset_category in ['libero_object','libero_spatial','libero_goal', "libero_10", "libero_90", "rw_all"]:
                     for dataset_name in os.listdir(dataset_category_path):
                         dataset_name = dataset_name.split("_demo_")[0] + '_demo'
-                        data_file_name_list.append(f"/public/home/group_luoping/leiyuheng/dataset/datasets/{dataset_category}/{dataset_name}.hdf5")
-                        file_pattern = f"/public/home/group_luoping/leiyuheng/dataset/datasets/lotus/{skill_exp_name}/skill_data/{dataset_category}/{dataset_name}*"
+                        data_file_name_list.append(f"path_to_dataset/{dataset_category}/{dataset_name}.hdf5")
+                        file_pattern = f"path_to_dataset/lotus/{skill_exp_name}/skill_data/{dataset_category}/{dataset_name}*"
                         matching_files = glob.glob(file_pattern)
                         assert len(matching_files)==1
                         subtasks_file_name_list.append(matching_files[0])
@@ -369,7 +369,7 @@ def main(hydra_cfg):
 
                 skill_learning_cfg = cfg.lifelong.lotus
                 skill_exp_name = skill_learning_cfg.exp_name
-                exp_dir = f"/public/home/group_luoping/leiyuheng/dataset/datasets/lotus/{skill_exp_name}/task_" + str(91+i) + "/skill_data"
+                exp_dir = f"path_to_dataset/lotus/{skill_exp_name}/task_" + str(91+i) + "/skill_data"
                 data_file_name_list = []
                 subtasks_file_name_list = []
                 used_data_file_name_list_skill = task_names #[]
@@ -379,8 +379,8 @@ def main(hydra_cfg):
                     if os.path.isdir(dataset_category_path) and dataset_category in ['libero_object','libero_spatial','libero_goal', "libero_10", "libero_90", "rw_all"]:
                         for dataset_name in os.listdir(dataset_category_path):
                             dataset_name = dataset_name.split("_demo_")[0] + '_demo'
-                            data_file_name_list.append(f"/public/home/group_luoping/leiyuheng/dataset/datasets/{dataset_category}/{dataset_name}.hdf5")
-                            file_pattern = f"/public/home/group_luoping/leiyuheng/dataset/datasets/lotus/{skill_exp_name}/task_" + str(91+i) + "/skill_data" + f"/{dataset_category}/{dataset_name}*"
+                            data_file_name_list.append(f"path_to_dataset/{dataset_category}/{dataset_name}.hdf5")
+                            file_pattern = f"path_to_dataset/lotus/{skill_exp_name}/task_" + str(91+i) + "/skill_data" + f"/{dataset_category}/{dataset_name}*"
                             matching_files = glob.glob(file_pattern)
                             assert len(matching_files)==1
                             subtasks_file_name_list.append(matching_files[0])

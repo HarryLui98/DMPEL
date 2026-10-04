@@ -299,10 +299,10 @@ class Sequential(nn.Module, metaclass=AlgoMeta):
                     prev_success_rate = success_rate
                     idx_at_best_succ = len(losses) - 1
 
-                    cumulated_counter += 1.0
-                    ci = confidence_interval(success_rate, self.cfg.eval.n_eval)
-                    tmp_successes = np.array(successes)
-                    tmp_successes[idx_at_best_succ:] = successes[idx_at_best_succ]
+                cumulated_counter += 1.0
+                ci = confidence_interval(success_rate, self.cfg.eval.n_eval)
+                tmp_successes = np.array(successes)
+                tmp_successes[idx_at_best_succ:] = successes[idx_at_best_succ]
                 
                 t1 = time.time()
                 print(

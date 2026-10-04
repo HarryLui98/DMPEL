@@ -52,8 +52,9 @@ class ER(Sequential):
         if self.current_task > 0:
             multiprocessing.set_start_method("fork", force=True)
             # WARNING: currently we have a fixed size memory for each task.
+            # We use a fixed proportion of the dataset for replay. The default is 20%.
             buffers = [
-                TruncatedSequenceDataset(dataset, len(dataset)//5) # self.cfg.lifelong.n_memories)
+                TruncatedSequenceDataset(dataset, int(len(dataset) * self.cfg.lifelong.replay_ratio)) # self.cfg.lifelong.n_memories)
                 for dataset in self.datasets
             ]
             buf = ConcatDataset(buffers)
@@ -83,6 +84,7 @@ class ER(Sequential):
             loss = self.policy.compute_loss(data)
         self.scaler.scale(self.loss_scale * loss).backward()
         if self.cfg.train.grad_clip is not None:
+            self.scaler.unscale_(self.optimizer)
             grad_norm = nn.utils.clip_grad_norm_(
                 self.policy.parameters(), self.cfg.train.grad_clip
             )

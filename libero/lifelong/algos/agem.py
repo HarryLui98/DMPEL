@@ -106,6 +106,7 @@ class AGEM(ER):
                 overwrite_grad(self.policy.parameters, self.grad_xy, self.grad_dims)
 
         if self.cfg.train.grad_clip is not None:
+            self.scaler.unscale_(self.optimizer)
             grad_norm = nn.utils.clip_grad_norm_(
                 self.policy.parameters(), self.cfg.train.grad_clip
             )

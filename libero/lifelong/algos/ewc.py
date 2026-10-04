@@ -85,6 +85,7 @@ class EWC(Sequential):
         assert not torch.isnan(loss)
         self.scaler.scale(self.loss_scale * loss).backward()
         if self.cfg.train.grad_clip is not None:
+            self.scaler.unscale_(self.optimizer)
             grad_norm = nn.utils.clip_grad_norm_(
                 self.policy.parameters(), self.cfg.train.grad_clip
             )

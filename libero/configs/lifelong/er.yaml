@@ -1,2 +1,3 @@
 algo: ER
-n_memories: 1000
+# n_memories: 1000
+replay_ratio: 0.2
